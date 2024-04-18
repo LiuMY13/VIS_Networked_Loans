@@ -7,12 +7,12 @@
 </head>
 <body>
 <div id="network"></div>
-<button id="changeColorButton">change the color by</button>
+<button id="changeColorButton">change the color by category</button>
 <div id = "choropleth"></div>
 <script type="text/javascript">
 //Width and height
 var w = 1000;
-var h = 1000;
+var h = 800;
 d3.dsv(",", "data_all.csv", function(d) {
 	return {
 		start_date: new Date(d.start_date),
@@ -141,7 +141,7 @@ var processedData = processData(data, dateFilter);
 
 	div.append("p")
 		.attr("id", "t-Year")
-		.style("width", "80%")
+		.style("width", "100%")
 		.style("height", "30px")
 		.style("text-align", "center")
 		.style("font-weight", "bold")
@@ -270,6 +270,7 @@ function createNetwork(dataset,dateValue){
 					return "black";  // 改变颜色，替换为你想要的颜色
             });
 		default_graph = false;
+		document.getElementById("changeColorButton").innerHTML = "change the color by default";
 	}
 	else{
 		d3.select("#network").selectAll("circle")
@@ -278,7 +279,8 @@ function createNetwork(dataset,dateValue){
             .style("fill", function(d) {
 			return default_color[d.default];
 			});
-		default_graph = true;	
+		default_graph = true;
+		document.getElementById("changeColorButton").innerHTML = "change the color by category";	
 	}
 
     //}
@@ -292,7 +294,7 @@ function createNetwork(dataset,dateValue){
 	//Create SVG element
 	var svg = d3.select("#network")
 		.append("svg")
-		.attr("width", "80%")
+		.attr("width", "100%")
 		.attr("height", h)
 		;
 
@@ -314,7 +316,7 @@ function createNetwork(dataset,dateValue){
 	var force = d3.forceSimulation(dataset.nodes)
 		.force("charge", d3.forceManyBody().strength(-2))
 		.force("link", d3.forceLink(dataset.edges).strength(0.2).distance(30))
-		.force("center", d3.forceCenter().x(1415 / 2).y(h / 2))
+		.force("center", d3.forceCenter().x(2600 / 2).y(h / 2))
 		.on("tick", function() {
 			nodes.forEach(function(d) {
 				d.x = Math.max(boundaryMargin, Math.min(1000 - boundaryMargin, d
@@ -523,7 +525,8 @@ function initMap(selectedCategory, selectedYear) {
 // enter code to create svg
     var svg = d3.select("#choropleth").append("svg")
         .attr("width", svgWidth)
-        .attr("height", svgHeight);
+        .attr("height", svgHeight)
+		.style("transform", "translate(" + svgWidth / 2 + "px," + 0 + "px)");
     var countries = svg.append("g").attr("id", "countries");
     var legends = svg.append("g").attr("id", "legend");
 
@@ -659,6 +662,8 @@ function initMap(selectedCategory, selectedYear) {
     #network, #choropleth {
         width: 100%;
         margin: auto;
+		justify-content: center; 
+    	align-items: center;
     }
 
 </style>
