@@ -124,7 +124,13 @@ function processData(data, date) {
 var dateFilter = "2024-03-15"; // 例如，过滤条件为2024年3月15日
 var processedData = processData(data, dateFilter);
 
-	var colors = d3.scaleOrdinal(d3.schemeCategory10);
+	var colors = d3.schemeCategory10;
+	//var colors = d3.scaleOrdinal(d3.schemeCategory10);
+	console.log("------------------------输出颜色---------------------------");
+	d3.schemeCategory10.forEach(function(color, i) {
+		console.log('color index', i, ':', color);
+	});
+	
 	var default_color = ['green','red'];
 	var div0 = d3.select("#network")
 		.append("div")
@@ -243,29 +249,57 @@ function createNetwork(dataset,dateValue){
         d3.select("#network").selectAll("circle")
             .transition()      // 添加过渡效果
             .duration(500)     // 过渡持续时间
+			/**
             .style("fill", function(d) {
                 if(d.category == "daily consumption")
 					return colors(0);
-				if(d.category == "energy")
+				else if(d.category == "energy")
 					return colors(1);
-				if(d.category == "financial")
+				else if(d.category == "financial")
 					return colors(2);
-				if(d.category == "it")
+				else if(d.category == "it")
 					return colors(3);
-				if(d.category == "materials")
+				else if(d.category == "materials")
 					return colors(4);
-				if(d.category == "medical_insurance")
+				else if(d.category == "medical_insurance")
 					return colors(5);
-				if(d.category == "optional")
+				else if(d.category == "optional")
 					return colors(6);
-				if(d.category == "public")
+				else if(d.category == "public")
 					return colors(7);
-				if(d.category == "real estate")
+				else if(d.category == "real estate")
 					return colors(8);
 				//if(d.category == "it")
 					//return colors(9);
-				if(d.category == "industry")
+				else if(d.category == "industry")
 					return colors(9);
+				else
+					return "black";  // 改变颜色，替换为你想要的颜色
+            });
+			**/
+			.style("fill", function(d) {
+                if(d.category == "daily consumption")
+					return '#1f77b4';//深蓝色
+				else if(d.category == "energy")
+					return '#ff7f0e';//橙色
+				else if(d.category == "financial")
+					return '#2ca02c';//绿色
+				else if(d.category == "it")
+					return '#d62728';//红色
+				else if(d.category == "materials")
+					return '#9467bd';//紫色
+				else if(d.category == "medical_insurance")
+					return '#8c564b';//棕色
+				else if(d.category == "optional")
+					return '#e377c2';//粉红色
+				else if(d.category == "public")
+					return '#7f7f7f';//灰色
+				else if(d.category == "real estate")
+					return '#bcbd22';//橄榄绿色
+				//if(d.category == "it")
+					//return colors(9);
+				else if(d.category == "industry")
+					return '#17becf';//青色
 				else
 					return "black";  // 改变颜色，替换为你想要的颜色
             });
