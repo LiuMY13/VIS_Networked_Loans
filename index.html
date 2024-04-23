@@ -553,7 +553,7 @@ function initMap(selectedCategory, selectedYear) {
     d3.select("#choropleth").selectAll("svg").remove();
 // enter code to define margin and dimensions for svg
     margins = ({top: 22, right: 32, bottom: 22, left: 32})
-    var svgWidth = 1000;
+    var svgWidth = 1100;
     var svgHeight = 500;
 
 // enter code to create svg
@@ -577,7 +577,7 @@ function initMap(selectedCategory, selectedYear) {
     var projection = d3.geoMercator()
         .center([105, 38])
         .scale(600)
-        .translate([svgWidth / 2, svgHeight / 2]);
+        .translate([500, svgHeight / 2]);
 
     var path = d3.geoPath().projection(projection);
 
@@ -653,7 +653,7 @@ function initMap(selectedCategory, selectedYear) {
 
             for (var i = 0; i < colorRange.length; i++) {
                 legends.append("rect")
-                    .attr('x', 830)
+                    .attr('x', 865)
                     .attr('y', 50 + 20 * i)
                     .attr('height', 15)
                     .attr('width', 15)
@@ -664,7 +664,7 @@ function initMap(selectedCategory, selectedYear) {
 
             legends.append("text")
                 .attr("id", "txt1")
-                .attr("x", 855)
+                .attr("x", 900)
                 .attr("y", 63)
                 .style("font-size", "15px")
                 .text("≤ " + quantiles[0].toFixed(2));
@@ -673,7 +673,7 @@ function initMap(selectedCategory, selectedYear) {
                 if (i < colorRange.length - 2) {
                     legends.append("text")
                         .attr("id", "txt" + (i + 2))
-                        .attr("x", 855)
+                        .attr("x", 900)
                         .attr("y", 83 + 20 * i)
                         .style("font-size", "15px")
                         .text(quantiles[i].toFixed(2) + " to " + quantiles[i + 1].toFixed(2));
@@ -682,7 +682,7 @@ function initMap(selectedCategory, selectedYear) {
 
             legends.append("text")
                 .attr("id", "txt" + (colorRange.length))
-                .attr("x", 855)
+                .attr("x", 900)
                 .attr("y", 63 + 20 * (colorRange.length - 1))
                 .style("font-size", "15px")
                 .text("> " + quantiles[quantiles.length - 1].toFixed(2));
