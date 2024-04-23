@@ -639,7 +639,10 @@ function initMap(selectedCategory, selectedYear) {
                         tp.html("Province: " + provinceData.Province + "<br/>" +
                             "Values in " + selectedYear + " (100 million yuan): " + provinceData["Values in " + selectedYear + " (100 million yuan)"]
                             + "<br/>" + "Category: "+ selectedCategory)
-                            .style("opacity", 1);
+                            .style("opacity", 1)
+							.style("left", (d3.event.pageX + 10) + "px") // 设置提示框的左边距为鼠标位置的横坐标加10px
+          					.style("top", (d3.event.pageY + 10) + "px")
+							.style("color",'red');  // 设置提示框的顶部距离为鼠标位置的纵坐标加10px;
                     }
                 })
                 .on("mouseout", function (d) {
@@ -699,6 +702,9 @@ function initMap(selectedCategory, selectedYear) {
 		justify-content: center; 
     	align-items: center;
     }
+	.tooltip{
+		position:absolute;
+	}
 
 </style>
 </html>
